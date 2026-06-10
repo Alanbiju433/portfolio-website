@@ -2,258 +2,233 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alan Biju's Projects</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" media="screen">
-    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 600px)">
+    <title>Projects | Alan Biju</title>
     <link rel="icon" href="icon.webp" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#060614;--bg2:#0d0d2b;--accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#e2e8f0;--muted:#94a3b8;--glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.1);--card:rgba(13,13,43,0.8);--r:16px}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+        body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 20% 20%,rgba(124,58,237,.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(6,182,212,.1) 0%,transparent 50%);animation:bgShift 18s ease-in-out infinite alternate;pointer-events:none;z-index:0}
+        @keyframes bgShift{0%{transform:translate(0,0)}100%{transform:translate(4%,4%)}}
+
+        /* NAV */
+        nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,20,.75);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+        .nav-links{display:flex;gap:4px;list-style:none}
+        .nav-links a{color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s}
+        .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--glass)}
+        .nav-cta{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;color:#fff!important;padding:8px 20px!important;border-radius:8px!important}
+        .hamburger{display:none;font-size:22px;cursor:pointer;color:var(--text);background:none;border:none}
+
+        /* PAGE HERO */
+        .page-hero{padding:120px 48px 60px;text-align:center;position:relative;z-index:1}
+        .page-label{color:var(--accent2);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;animation:fadeUp .6s ease both}
+        .page-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;background:linear-gradient(135deg,#fff 30%,rgba(167,139,250,.9) 70%,rgba(6,182,212,.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .6s ease .1s both}
+        .page-sub{color:var(--muted);font-size:16px;margin-top:16px;animation:fadeUp .6s ease .2s both}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+        /* CONTAINER */
+        .container{max-width:1100px;margin:0 auto;padding:0 48px 80px;position:relative;z-index:1}
+
+        /* FILTER TABS */
+        .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;justify-content:center}
+        .filter-tab{padding:8px 20px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--glass);color:var(--muted);transition:all .2s}
+        .filter-tab.active,.filter-tab:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+
+        /* PROJECTS GRID */
+        .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px}
+
+        /* PROJECT CARD */
+        .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .35s;position:relative;backdrop-filter:blur(8px);opacity:0;transform:translateY(28px)}
+        .project-card.visible{opacity:1;transform:translateY(0)}
+        .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s}
+        .project-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-8px);box-shadow:0 28px 72px rgba(0,0,0,.4)}
+        .project-card:hover::before{opacity:1}
+
+        .card-img{width:100%;height:180px;object-fit:cover;display:block;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(6,182,212,.15));position:relative}
+        .card-img-placeholder{width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(6,182,212,.1));font-size:56px}
+        .card-body{padding:24px}
+        .card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+        .card-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+        .card-link{width:36px;height:36px;border-radius:9px;background:var(--glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .2s;flex-shrink:0}
+        .card-link:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:scale(1.1)}
+        .card-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:18px}
+        .card-tags{display:flex;flex-wrap:wrap;gap:7px}
+        .tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.2);text-transform:uppercase;letter-spacing:.5px}
+        .tag.cyan{background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.2)}
+        .tag.amber{background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.2)}
+        .tag.green{background:rgba(74,222,128,.15);color:#4ade80;border-color:rgba(74,222,128,.2)}
+
+        /* COMING SOON */
+        .coming-soon{border:1px dashed rgba(124,58,237,.3);background:rgba(124,58,237,.04)}
+        .coming-soon .card-img-placeholder{background:rgba(124,58,237,.06)}
+        .coming-badge{display:inline-block;padding:4px 12px;border-radius:100px;background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* FOOTER */
+        footer{padding:48px;border-top:1px solid var(--border);position:relative;z-index:1}
+        .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+        .footer-copy{color:var(--muted);font-size:14px}
+        .footer-socials{display:flex;gap:12px}
+        .footer-socials a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--border);border-radius:11px;color:var(--muted);font-size:17px;text-decoration:none;transition:all .3s}
+        .footer-socials a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-3px)}
+
+        /* MOBILE */
+        @media(max-width:768px){
+            nav{padding:0 20px}
+            .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(6,6,20,.97);backdrop-filter:blur(20px);padding:20px;gap:4px;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}
+            .hamburger{display:block}
+            .page-hero,.container{padding-left:20px;padding-right:20px}
+            footer{padding:32px 20px}
+            .footer-inner{flex-direction:column;text-align:center}
+        }
+    </style>
 </head>
 <body>
-    <div id="content">
-        <header>
-            <div class="hamburger" onclick="toggleNav()">☰</div>
-        </header>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aboutme.html">About me</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="sitereport.html">Site report</a></li>
-                <li><a href="demovideo.html">Demo video</a></li>
-            </ul>
-        </nav>
-        <main>
-            <h2>My Projects</h2>
-            <div class="projects">
-                <div class="project">
-                    <h3>Project 1</h3>
-                    <img src="13.png" alt="Project 1">
-                    <p>
-  <div class="section">
-    <h2>🔮 Project Overview</h2>
-    <p>This project presents a visionary, AI-integrated waste management ecosystem that transforms urban waste into valuable products through modular, sustainable, and mythically inspired infrastructure.</p>
-    <p>The system combines smart sorting, pneumatic routing, synthetic biology, and real-time AI orchestration to create a closed-loop waste-to-resource pipeline.</p>
-  </div>
-
-  <div class="section">
-    <h2>🧠 System Architecture</h2>
-    <h3>1. Smart Waste Sorting Bin</h3>
-    <ul>
-      <li><span class="highlight">Design:</span> Tri-compartment bin for Recyclable, Plastic, and Burnable waste.</li>
-      <li><span class="highlight">Technology:</span>
-        <ul>
-          <li>AI-powered vision and material sensors for real-time classification.</li>
-          <li>Emotion-aware feedback interface for user engagement.</li>
-        </ul>
-      </li>
-      <li><span class="highlight">Functionality:</span>
-        <ul>
-          <li>Auto-sorting and vacuum-routing to respective plants.</li>
-          <li>Bin status monitored via secure backend (Node.js + Firebase).</li>
-        </ul>
-      </li>
+<nav>
+    <a href="index.html" class="nav-logo">AB.</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutme.html">About</a></li>
+        <li><a href="project.html" class="active">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="demovideo.html">Demo</a></li>
+        <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
     </ul>
+    <button class="hamburger" onclick="toggleNav()">&#9776;</button>
+</nav>
 
-    <h3>2. Vacuum Transfer Network</h3>
-    <ul>
-      <li><span class="highlight">Mechanism:</span> Pneumatic tubes connect the bin to four specialized plants.</li>
-      <li><span class="highlight">Benefits:</span>
-        <ul>
-          <li>Reduces contamination and manual handling.</li>
-          <li>Enables real-time waste flow tracking and adaptive routing.</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+<div class="page-hero">
+    <p class="page-label">What I've built</p>
+    <h1 class="page-title">My Projects</h1>
+    <p class="page-sub">A collection of things I've built — from AI systems to web apps.</p>
+</div>
 
-  <div class="section">
-    <h2>🏭 Processing Plants</h2>
+<div class="container">
 
-    <h3>🔥 A. Incineration & CO₂ Beverage Plant</h3>
-    <ul>
-      <li><span class="highlight">Input:</span> Burnable waste.</li>
-      <li><span class="highlight">Process:</span> Incineration → CO₂ capture → Purification → Infusion into drinks.</li>
-      <li><span class="highlight">Output:</span> Eco-soda from waste-derived CO₂.</li>
-      <li><span class="highlight">Innovation:</span> Combines thermal recovery with beverage-grade CO₂ purification.</li>
-    </ul>
+    <div class="projects-grid" id="projects-grid">
 
-    <h3>🧱 B. Plastic Brick Plant</h3>
-    <ul>
-      <li><span class="highlight">Input:</span> Plastic waste (non-PET).</li>
-      <li><span class="highlight">Process:</span> Shredding → Molding → Cement coating → Vanilla infusion via E. coli.</li>
-      <li><span class="highlight">Output:</span> Vanilla-scented construction bricks.</li>
-      <li><span class="highlight">Biotech:</span> Synthetic biology used to produce scent compounds from waste.</li>
-    </ul>
-
-    <h3>🌼 C. Vanillin Bioconversion Plant</h3>
-    <ul>
-      <li><span class="highlight">Input:</span> PET plastic waste.</li>
-      <li><span class="highlight">Process:</span> Enzymatic breakdown → Terephthalic acid → Vanillin via E. coli.</li>
-      <li><span class="highlight">Output:</span> Food-grade or industrial vanillin extract.</li>
-      <li><span class="highlight">Applications:</span> Flavoring, perfumery, resale to fragrance industry.</li>
-    </ul>
-
-    <h3>🔄 D. AI-Driven Recycling Plant</h3>
-    <ul>
-      <li><span class="highlight">Input:</span> Recyclable waste (paper, metal, glass).</li>
-      <li><span class="highlight">Process:</span> AI vision + robotic arms → Sorting → Cleaning → Compaction.</li>
-      <li><span class="highlight">Output:</span> Raw materials for manufacturing.</li>
-      <li><span class="highlight">AI Role:</span> Adaptive sorting logic, anomaly detection, throughput optimization.</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>🗺️ System Flow Diagram</h2>
-    <p>The system routes waste from the smart bin to each plant via vacuum tubes. Each plant transforms waste into a unique product:</p>
-    <ul>
-      <li>Burnable → CO₂ → Carbonated Drinks</li>
-      <li>Plastic → Bricks + Vanillin</li>
-      <li>Recyclable → Raw Materials</li>
-    </ul>
-    <p><em>(Visual diagram included above)</em></p>
-  </div>
-
-  <div class="section">
-    <h2>🧬 AI & Backend Integration</h2>
-    <ul>
-      <li><span class="highlight">Backend:</span> Modular Node.js architecture with secure API routing.</li>
-      <li><span class="highlight">Frontend:</span> Emotion-aware interface for bin interaction and plant status.</li>
-      <li><span class="highlight">AI Modules:</span>
-        <ul>
-          <li>Waste classification (YOLOv8 + material sensors).</li>
-          <li>Plant routing logic based on waste type and purity.</li>
-          <li>Continuous learning from waste patterns and user behavior.</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>🌍 Sustainability Impact</h2>
-    <ul>
-      <li>Zero Waste Goal: Every waste stream is valorized.</li>
-      <li>Carbon Capture: Incinerator emissions are purified and reused.</li>
-      <li>Plastic Valorization: PET becomes vanillin; other plastics become bricks.</li>
-      <li>Biotech Circularity: Synthetic biology turns pollutants into scent and flavor.</li>
-    </ul>
-  </div>
-
-</p>
+        <!-- Project 1: AI Waste Management -->
+        <div class="project-card">
+            <div class="card-img-placeholder">♻️</div>
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 class="card-title">AI Waste Management System</h3>
+                    <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener" class="card-link"><i class="fab fa-github"></i></a>
                 </div>
-                <div class="project">
-                    <h3>Project 2</h3>
-                    <img src="14.png" alt="Project 2">
-                    <p> <h1>💌 Project Report: Love Proposal Web App</h1>
-  <p><strong>By Alan Biju</strong> | BSc AI & Data Science</p>
-
-  <div class="section">
-    <h2>🌟 Project Overview</h2>
-    <p>This project is a minimalist, emotionally expressive web application designed to deliver a romantic proposal in a playful, interactive format.</p>
-    <p>It blends HTML, CSS, and JavaScript to create a lightweight, responsive experience that invites the user to engage with a heartfelt question.</p>
-  </div>
-
-  <div class="section">
-    <h2>🧱 Technical Architecture</h2>
-    <ul>
-      <li><span class="highlight">Frontend Stack:</span>
-        <ul>
-          <li>HTML5 for structure</li>
-          <li>CSS3 for styling and layout</li>
-          <li>JavaScript for interactivity and button logic</li>
-        </ul>
-      </li>
-      <li><span class="highlight">Design Elements:</span>
-        <ul>
-          <li>Centered semantic layout with a bold title: <em>“Love Proposal – Will You Be My Forever?”</em></li>
-          <li>Interactive buttons: “Yes 💖”, “No 😢”, “Yesssss 💖”</li>
-          <li>Conditional response message: <em>“Thank you... For saying yes. For being my forever.”</em></li>
-          <li>Clean, mobile-friendly design with minimal distractions</li>
-        </ul>
-      </li>
-      <li><span class="highlight">Deployment:</span>
-        <ul>
-          <li>Hosted via GitHub Pages at <a href="https://alanbiju433.github.io/proposal" target="_blank">alanbiju433.github.io/proposal</a></li>
-          <li>Static site architecture for fast load and zero backend dependencies</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>🎯 Purpose & Use Case</h2>
-    <ul>
-      <li><span class="highlight">Emotional Expression:</span> A digital medium for expressing affection or proposing in a unique, tech-savvy way</li>
-      <li><span class="highlight">Interactive Storytelling:</span> Uses button logic to simulate a dialogue and emotional response</li>
-      <li><span class="highlight">Portfolio Showcase:</span> Demonstrates frontend skills, creativity, and personal branding</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>🧠 Features & Logic</h2>
-    <ul>
-      <li><span class="highlight">Button Interactions:</span>
-        <ul>
-          <li>Clicking “Yes” or “Yesssss” triggers a thank-you message</li>
-          <li>Clicking “No” displays a sad emoji response</li>
-          <li>All interactions are handled client-side with JavaScript</li>
-        </ul>
-      </li>
-      <li><span class="highlight">Semantic Structure:</span>
-        <ul>
-          <li>Clear heading hierarchy</li>
-          <li>Accessible button labels</li>
-          <li>Responsive layout for desktop and mobile</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>🌍 Impact & Creativity</h2>
-    <ul>
-      <li><span class="highlight">Personal Branding:</span> Reflects Alan’s mythic and emotionally resonant design philosophy</li>
-      <li><span class="highlight">Creative Coding:</span> Transforms a simple HTML page into a meaningful experience</li>
-      <li><span class="highlight">Engagement:</span> Encourages interaction and emotional connection through playful UI</li>
-    </ul>
-  </div>
-</p>
-                </div>
-                <div class="project">
-                    <h3>Project 3</h3>
-                    <img src="8136031.png" alt="Project 3">
-                    <p>Description of Project 3-will be updated in future</p>
-                </div>
-                <div class="project">
-                    <h3>Project 4</h3>
-                    <img src="8136031.png" alt="Project 4">
-                    <p>Description of Project 4-will be updated in future</p>
+                <p class="card-desc">A visionary AI-integrated waste management ecosystem that transforms urban waste into valuable products — eco-soda, vanilla-scented bricks, and vanillin — through smart sorting, pneumatic routing, and real-time AI orchestration.</p>
+                <div class="card-tags">
+                    <span class="tag">Python</span><span class="tag cyan">YOLOv8</span><span class="tag amber">Node.js</span><span class="tag green">AI</span>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <!-- Project 2: Realtime Chat App -->
+        <div class="project-card">
+            <div class="card-img-placeholder">💬</div>
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 class="card-title">Realtime Chat App</h3>
+                    <a href="https://github.com/Alanbiju433/realtime-chat-app" target="_blank" rel="noopener" class="card-link"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="card-desc">A real-time messaging application with a Node.js backend, persistent message history, Socket.io for live updates, and a clean vanilla JavaScript frontend.</p>
+                <div class="card-tags">
+                    <span class="tag amber">Node.js</span><span class="tag cyan">Socket.io</span><span class="tag">JavaScript</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 3: Palm Recognition ML -->
+        <div class="project-card">
+            <div class="card-img-placeholder">🖐️</div>
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 class="card-title">Palm Recognition ML</h3>
+                    <a href="https://github.com/Alanbiju433/palm-recognition-ml" target="_blank" rel="noopener" class="card-link"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="card-desc">A biometric palm recognition system built with computer vision and machine learning. Uses an augmented image dataset and OpenCV for real-time hand detection and identity matching.</p>
+                <div class="card-tags">
+                    <span class="tag">Python</span><span class="tag cyan">OpenCV</span><span class="tag amber">ML</span><span class="tag green">CV</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4: Birthday Event Site -->
+        <div class="project-card">
+            <div class="card-img-placeholder">🎂</div>
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 class="card-title">Birthday Event Site</h3>
+                    <a href="https://github.com/Alanbiju433/birthday-event-site" target="_blank" rel="noopener" class="card-link"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="card-desc">A multi-page birthday event website featuring a photo gallery, RSVP form, personal story page, and background music. Designed with attention to emotional storytelling and interactive UI.</p>
+                <div class="card-tags">
+                    <span class="tag">HTML</span><span class="tag cyan">CSS</span><span class="tag amber">JavaScript</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 5: Love Proposal Web App -->
+        <div class="project-card">
+            <div class="card-img-placeholder">💌</div>
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 class="card-title">Love Proposal Web App</h3>
+                    <a href="https://alanbiju433.github.io/proposal" target="_blank" rel="noopener" class="card-link"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <p class="card-desc">A minimalist, emotionally expressive web app that delivers a romantic proposal in a playful, interactive format. Demonstrates creative front-end development and interactive button logic.</p>
+                <div class="card-tags">
+                    <span class="tag">HTML</span><span class="tag cyan">CSS</span><span class="tag amber">JavaScript</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="project-card coming-soon">
+            <div class="card-img-placeholder">🚀</div>
+            <div class="card-body">
+                <div class="coming-badge">Coming Soon</div>
+                <h3 class="card-title" style="margin-bottom:12px">Next Project</h3>
+                <p class="card-desc">Something exciting is in the works. Stay tuned for my next build — pushing the boundaries of AI and web development.</p>
+                <div class="card-tags">
+                    <span class="tag amber">In Progress</span>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <script>
-        function toggleNav() {
-            var nav = document.getElementById("nav-menu");
-            nav.classList.toggle("show");
-        }
-    </script>
-    <footer>
-    <div class="footer-links">
-        <a href="https://www.instagram.com/egoistisagi_/?__pwa=1" target="_blank">
-           <i class="fab fa-instagram social-logo" aria-hidden="true"></i>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank">
-           <i class="fab fa-facebook social-logo" aria-hidden="true"></i>
-        </a>
-        <a href="mailto:alanbiju17@gmail.com">
-           <i class="fas fa-envelope social-logo" aria-hidden="true"></i>
-        </a>
+</div>
+
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy">&#169; 2025 Alan Biju &middot; Built with passion for AI &amp; the web.</p>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/egoistisagi_/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+            <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="mailto:alanbiju17@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
     </div>
 </footer>
+
+<script>
+function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
+const cards=document.querySelectorAll('.project-card');
+const obs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+        cards.forEach((c,i)=>setTimeout(()=>{c.style.transition='opacity .6s ease '+i*80+'ms, transform .6s ease '+i*80+'ms, border-color .35s, box-shadow .35s';c.classList.add('visible')},i*90));
+        obs.disconnect();
+    }
+},{threshold:.05});
+if(cards.length)obs.observe(cards[0].parentElement);
+</script>
 </body>
 </html>
-
-
-

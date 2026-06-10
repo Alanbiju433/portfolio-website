@@ -2,66 +2,224 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Alan Biju</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" media="screen">
-    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 600px)">
+    <title>Contact | Alan Biju</title>
     <link rel="icon" href="icon.webp" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#060614;--bg2:#0d0d2b;--accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#e2e8f0;--muted:#94a3b8;--glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.1);--card:rgba(13,13,43,0.8);--r:16px}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+        body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 20% 20%,rgba(124,58,237,.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(6,182,212,.1) 0%,transparent 50%);animation:bgShift 18s ease-in-out infinite alternate;pointer-events:none;z-index:0}
+        @keyframes bgShift{0%{transform:translate(0,0)}100%{transform:translate(4%,4%)}}
+
+        /* NAV */
+        nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,20,.75);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+        .nav-links{display:flex;gap:4px;list-style:none}
+        .nav-links a{color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s}
+        .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--glass)}
+        .nav-cta{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;color:#fff!important;padding:8px 20px!important;border-radius:8px!important}
+        .hamburger{display:none;font-size:22px;cursor:pointer;color:var(--text);background:none;border:none}
+
+        /* PAGE HERO */
+        .page-hero{padding:120px 48px 60px;text-align:center;position:relative;z-index:1}
+        .page-label{color:var(--accent2);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;animation:fadeUp .6s ease both}
+        .page-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;background:linear-gradient(135deg,#fff 30%,rgba(167,139,250,.9) 70%,rgba(6,182,212,.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .6s ease .1s both}
+        .page-sub{color:var(--muted);font-size:16px;margin-top:16px;animation:fadeUp .6s ease .2s both}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+        /* LAYOUT */
+        .container{max-width:960px;margin:0 auto;padding:0 48px 80px;position:relative;z-index:1}
+        .contact-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:40px;align-items:start}
+
+        /* CONTACT INFO */
+        .contact-info{display:flex;flex-direction:column;gap:16px}
+        .info-card{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px);transition:all .3s}
+        .info-card:hover{border-color:rgba(124,58,237,.35);transform:translateX(4px)}
+        .info-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(6,182,212,.2));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid rgba(124,58,237,.2)}
+        .info-text h4{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+        .info-text p,.info-text a{font-size:15px;color:var(--text);text-decoration:none;transition:color .2s}
+        .info-text a:hover{color:var(--accent2)}
+
+        /* SOCIALS */
+        .socials-section{margin-top:8px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px)}
+        .socials-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+        .socials-row{display:flex;gap:10px;flex-wrap:wrap}
+        .social-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;background:var(--glass);border:1px solid var(--border);border-radius:10px;color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;transition:all .3s}
+        .social-btn:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-2px)}
+        .social-btn i{font-size:15px}
+
+        /* FORM */
+        .contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:36px;backdrop-filter:blur(8px)}
+        .form-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px;color:var(--text)}
+        .form-sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6}
+        .form-group{margin-bottom:20px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+        label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.6px}
+        input,textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--text);font-family:'Inter',sans-serif;font-size:15px;transition:all .25s;outline:none;resize:vertical}
+        input::placeholder,textarea::placeholder{color:rgba(148,163,184,.5)}
+        input:focus,textarea:focus{border-color:var(--accent);background:rgba(124,58,237,.06);box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+        textarea{min-height:130px}
+        .btn-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;letter-spacing:.3px}
+        .btn-submit:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(124,58,237,.45)}
+        .btn-submit:active{transform:translateY(0)}
+
+        /* SUCCESS */
+        .form-success{display:none;text-align:center;padding:32px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:var(--r)}
+        .form-success.show{display:block}
+        .form-success .check{font-size:48px;margin-bottom:16px}
+        .form-success h3{font-family:'Space Grotesk',sans-serif;font-size:20px;color:var(--text);margin-bottom:8px}
+        .form-success p{color:var(--muted);font-size:14px}
+
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* FOOTER */
+        footer{padding:48px;border-top:1px solid var(--border);position:relative;z-index:1}
+        .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+        .footer-copy{color:var(--muted);font-size:14px}
+        .footer-socials{display:flex;gap:12px}
+        .footer-socials a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--border);border-radius:11px;color:var(--muted);font-size:17px;text-decoration:none;transition:all .3s}
+        .footer-socials a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-3px)}
+
+        /* MOBILE */
+        @media(max-width:768px){
+            nav{padding:0 20px}
+            .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(6,6,20,.97);backdrop-filter:blur(20px);padding:20px;gap:4px;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}
+            .hamburger{display:block}
+            .page-hero,.container{padding-left:20px;padding-right:20px}
+            .contact-layout{grid-template-columns:1fr}
+            .form-row{grid-template-columns:1fr}
+            footer{padding:32px 20px}
+            .footer-inner{flex-direction:column;text-align:center}
+        }
+    </style>
 </head>
 <body>
-    <div id="content">
-        <header>
-            <div class="hamburger" onclick="toggleNav()">☰</div>
-        </header>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aboutme.html">About me</a></li>
-                <li><a href="project.html">Projects</a></li>
-                <li><a href="sitereport.html">Site report</a></li>
-                <li><a href="demovideo.html">Demo video</a></li>
-            </ul>
-        </nav>
-        <main>
-            <h2>Contact Me</h2>
-            <p>You can reach me using the contact form below:</p>
-            <form action="mailto:alanbiju17@gmail.com" method="post" enctype="text/plain">
-                <p>name</p>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-                <p>email id</p>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <br>
-                <p>type your message</p>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-                <br>
-                <input type="submit" value="Send">
+<nav>
+    <a href="index.html" class="nav-logo">AB.</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutme.html">About</a></li>
+        <li><a href="project.html">Projects</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="demovideo.html">Demo</a></li>
+        <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleNav()">&#9776;</button>
+</nav>
+
+<div class="page-hero">
+    <p class="page-label">Let's connect</p>
+    <h1 class="page-title">Get In Touch</h1>
+    <p class="page-sub">Have a project in mind, want to collaborate, or just say hi? I'd love to hear from you.</p>
+</div>
+
+<div class="container">
+    <div class="contact-layout reveal">
+
+        <!-- LEFT: INFO -->
+        <div class="contact-info">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-envelope" style="color:var(--accent2)"></i></div>
+                <div class="info-text">
+                    <h4>Email</h4>
+                    <a href="mailto:alanbiju17@gmail.com">alanbiju17@gmail.com</a>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i></div>
+                <div class="info-text">
+                    <h4>Location</h4>
+                    <p>Northampton, United Kingdom</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-graduation-cap" style="color:var(--accent3)"></i></div>
+                <div class="info-text">
+                    <h4>University</h4>
+                    <p>University of Northampton</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-clock" style="color:#4ade80"></i></div>
+                <div class="info-text">
+                    <h4>Response Time</h4>
+                    <p>Usually within 24 hours</p>
+                </div>
+            </div>
+            <div class="socials-section">
+                <p class="socials-label">Find me on</p>
+                <div class="socials-row">
+                    <a href="https://www.instagram.com/egoistisagi_/" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: FORM -->
+        <div class="contact-form">
+            <h2 class="form-title">Send a message</h2>
+            <p class="form-sub">Fill out the form and I'll get back to you as soon as possible.</p>
+            <form id="contact-form" action="mailto:alanbiju17@gmail.com" method="post" enctype="text/plain" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What's this about?">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project, idea, or just say hi..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-paper-plane" style="margin-right:8px"></i>Send Message</button>
             </form>
-        </main>
+            <div class="form-success" id="form-success">
+                <div class="check">✅</div>
+                <h3>Message sent!</h3>
+                <p>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+            </div>
+        </div>
+
     </div>
-    <script>
-        function toggleNav() {
-            var nav = document.getElementById("nav-menu");
-            nav.classList.toggle("show");
-        }
-    </script>
-    <footer>
-    <div class="footer-links">
-        <a href="https://www.instagram.com/egoistisagi_/?__pwa=1" target="_blank">
-           <i class="fab fa-instagram social-logo" aria-hidden="true"></i>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank">
-           <i class="fab fa-facebook social-logo" aria-hidden="true"></i>
-        </a>
-        <a href="mailto:alanbiju17@gmail.com">
-           <i class="fas fa-envelope social-logo" aria-hidden="true"></i>
-        </a>
+</div>
+
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy">&#169; 2025 Alan Biju &middot; Built with passion for AI &amp; the web.</p>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/egoistisagi_/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+            <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="mailto:alanbiju17@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
     </div>
 </footer>
+
+<script>
+function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
+function handleSubmit(e){
+    setTimeout(()=>{
+        document.getElementById('contact-form').style.display='none';
+        document.getElementById('form-success').classList.add('show');
+    },200);
+}
+const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
