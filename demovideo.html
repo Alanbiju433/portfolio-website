@@ -2,56 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alan Biju's Projects</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" media="screen">
-    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 600px)">
+    <title>Demo | Alan Biju</title>
     <link rel="icon" href="icon.webp" type="image/x-icon">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#060614;--accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#e2e8f0;--muted:#94a3b8;--glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.1);--card:rgba(13,13,43,0.8);--r:16px}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+        body::before{content:'';position:fixed;top:-40%;left:-40%;width:180%;height:180%;background:radial-gradient(ellipse at 25% 25%,rgba(124,58,237,.15) 0%,transparent 50%),radial-gradient(ellipse at 75% 75%,rgba(6,182,212,.1) 0%,transparent 50%);animation:bgShift 20s ease-in-out infinite alternate;pointer-events:none;z-index:0}
+        @keyframes bgShift{0%{transform:translate(0,0)}100%{transform:translate(3%,3%)}}
+        #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:9999;width:0;transition:width .08s linear}
+        nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,20,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+        .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;letter-spacing:-.3px}
+        .nav-links{display:flex;gap:4px;list-style:none}
+        .nav-links a{color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s}
+        .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--glass)}
+        .nav-cta{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;color:#fff!important;padding:8px 20px!important;border-radius:8px!important}
+        .hamburger{display:none;font-size:22px;cursor:pointer;color:var(--text);background:none;border:none}
+        .page-hero{padding:120px 48px 56px;text-align:center;position:relative;z-index:1}
+        .page-label{color:var(--accent2);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;animation:fadeUp .6s ease both}
+        .page-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,5vw,68px);font-weight:800;background:linear-gradient(135deg,#fff 25%,rgba(167,139,250,.95) 65%,rgba(6,182,212,.85) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .6s ease .1s both;margin-bottom:18px}
+        .page-sub{color:var(--muted);font-size:16px;max-width:520px;margin:0 auto;line-height:1.7;animation:fadeUp .6s ease .2s both}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+        .container{max-width:1000px;margin:0 auto;padding:0 48px 100px;position:relative;z-index:1}
+        .video-section{animation:fadeUp .7s ease .3s both}
+        .video-meta{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+        .video-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.3px}
+        .badge-module{background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.3)}
+        .badge-uni{background:rgba(6,182,212,.12);color:#67e8f9;border:1px solid rgba(6,182,212,.22)}
+        .video-frame-wrap{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--border);background:rgba(0,0,0,.5);box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06);transition:box-shadow .4s}
+        .video-frame-wrap:hover{box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 0 1px rgba(124,58,237,.3),0 0 60px rgba(124,58,237,.1)}
+        .video-frame-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:2}
+        .video-frame-wrap iframe{display:block;width:100%;aspect-ratio:16/9;border:none}
+        .video-info{margin-top:28px;padding:28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px)}
+        .video-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px}
+        .video-desc{color:var(--muted);font-size:14px;line-height:1.85}
+        .highlights{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:48px}
+        .hl-card{padding:22px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px);transition:all .35s;text-align:center}
+        .hl-card:hover{border-color:rgba(124,58,237,.35);transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+        .hl-icon{font-size:32px;margin-bottom:12px;display:block}
+        .hl-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+        .hl-desc{font-size:13px;color:var(--muted);line-height:1.7}
+        .cta-row{display:flex;justify-content:center;gap:16px;margin-top:56px;flex-wrap:wrap}
+        .cta-btn{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;font-family:inherit}
+        .cta-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+        .cta-primary:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(124,58,237,.45)}
+        .cta-secondary{background:var(--glass);border:1px solid var(--border);color:var(--text)}
+        .cta-secondary:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1);transform:translateY(-4px)}
+        footer{padding:48px;border-top:1px solid var(--border);position:relative;z-index:1}
+        .footer-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+        .footer-copy{color:var(--muted);font-size:14px}
+        .footer-socials{display:flex;gap:12px}
+        .footer-socials a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--border);border-radius:11px;color:var(--muted);font-size:17px;text-decoration:none;transition:all .3s}
+        .footer-socials a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-4px)}
+        @media(max-width:768px){nav{padding:0 20px}.nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(6,6,20,.97);backdrop-filter:blur(20px);padding:20px;gap:4px;border-bottom:1px solid var(--border)}.nav-links.open{display:flex}.hamburger{display:block}.page-hero,.container{padding-left:20px;padding-right:20px}.cta-row{flex-direction:column;align-items:center}footer{padding:32px 20px}.footer-inner{flex-direction:column;text-align:center}}
+    </style>
 </head>
 <body>
-    <div id="content">
-        <header>
-            <div class="hamburger" onclick="toggleNav()">☰</div>
-        </header>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aboutme.html">About me</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="sitereport.html">Site report</a></li>
-                <li><a href="demovideo.html">Demo video</a></li>
-            </ul>
-        </nav>
-        
-        <div class="video-container">
-            <div class="video-box">
-              <iframe id="kmsembed-0_5njww7yh" width="auto" height="auto" src="https://mymedia.northampton.ac.uk/embed/secure/iframe/entryId/0_5njww7yh/uiConfId/23458795/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="demo video webdevelopment"></iframe>
-            </div>
+<div id="progress"></div>
+<nav>
+    <a href="index.html" class="nav-logo">Alan Biju</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutme.html">About</a></li>
+        <li><a href="project.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="demovideo.html" class="active">Demo</a></li>
+        <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleNav()">&#9776;</button>
+</nav>
+<div class="page-hero">
+    <p class="page-label">Project showcase</p>
+    <h1 class="page-title">Demo Video</h1>
+    <p class="page-sub">Watch my university project in action — a practical demonstration of skills applied to a real-world problem.</p>
+</div>
+<div class="container">
+    <div class="video-section">
+        <div class="video-meta">
+            <span class="video-badge badge-module"><i class="fas fa-graduation-cap"></i> University Project</span>
+            <span class="video-badge badge-uni"><i class="fas fa-university"></i> University of Northampton</span>
         </div>
-
-        <script>
-            function toggleNav() {
-                var nav = document.getElementById("nav-menu");
-                nav.classList.toggle("show");
-            }
-        </script>
-        <noscript>Your browser does not support JavaScript!</noscript>
-        <footer>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/egoistisagi_/?__pwa=1" target="_blank" rel="noopener noreferrer">
-                   <i class="fab fa-instagram social-logo" aria-hidden="true"></i>
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener noreferrer">
-                   <i class="fab fa-facebook social-logo" aria-hidden="true"></i>
-                </a>
-                <a href="mailto:alanbiju17@gmail.com">
-                   <i class="fas fa-envelope social-logo" aria-hidden="true"></i>
-                </a>
-            </div>
-        </footer>
+        <div class="video-frame-wrap">
+            <iframe
+                src="https://mymedia.northampton.ac.uk/embed/secure/iframe/entryId/0_5njww7yh/uiConfId/23458795/st/0"
+                allowfullscreen
+                webkitallowfullscreen
+                mozallowfullscreen
+                allow="autoplay *; fullscreen *; encrypted-media *"
+                frameborder="0"
+                sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation"
+                title="Alan Biju - University Project Demo">
+            </iframe>
+        </div>
+        <div class="video-info">
+            <h2 class="video-title">University Project Demo &mdash; Alan Biju</h2>
+            <p class="video-desc">This video presents a full walkthrough of my university project — demonstrating the technical approach, system design, and real-world application of concepts studied in AI and Data Science. The project showcases my ability to translate academic knowledge into a working, purposeful solution.</p>
+        </div>
     </div>
+    <div class="highlights">
+        <div class="hl-card">
+            <span class="hl-icon">🤖</span>
+            <div class="hl-title">Applied AI</div>
+            <div class="hl-desc">Real machine learning and computer vision integrated into a functional system.</div>
+        </div>
+        <div class="hl-card">
+            <span class="hl-icon">🎓</span>
+            <div class="hl-title">Academic Rigour</div>
+            <div class="hl-desc">Developed as part of BSc AI & Data Science coursework at the University of Northampton.</div>
+        </div>
+        <div class="hl-card">
+            <span class="hl-icon">🌍</span>
+            <div class="hl-title">Real-World Impact</div>
+            <div class="hl-desc">Solving a genuine problem with practical technology — not just a textbook exercise.</div>
+        </div>
+        <div class="hl-card">
+            <span class="hl-icon">⚡</span>
+            <div class="hl-title">Built from Scratch</div>
+            <div class="hl-desc">Designed, developed, and tested independently, demonstrating end-to-end ownership.</div>
+        </div>
+    </div>
+    <div class="cta-row">
+        <a href="project.html" class="cta-btn cta-primary"><i class="fas fa-folder-open"></i> View All Projects</a>
+        <a href="contact.html" class="cta-btn cta-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+    </div>
+</div>
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy">&#169; 2025 Alan Biju &mdash; AI &amp; Data Science Student</p>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/egoistisagi_/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+            <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="mailto:alanbiju17@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+</footer>
+<script>
+function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
+window.addEventListener('scroll',()=>{const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
+</script>
 </body>
 </html>
