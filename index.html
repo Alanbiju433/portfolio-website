@@ -12,8 +12,13 @@
         :root{--bg:#060614;--bg2:#0d0d2b;--accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#e2e8f0;--muted:#94a3b8;--glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.1);--card:rgba(13,13,43,0.8);--r:16px}
         html{scroll-behavior:smooth}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+        /* BG BLOBS */
         body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 20% 20%,rgba(124,58,237,.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(6,182,212,.1) 0%,transparent 50%),radial-gradient(ellipse at 60% 10%,rgba(245,158,11,.07) 0%,transparent 40%);animation:bgShift 18s ease-in-out infinite alternate;pointer-events:none;z-index:0}
         @keyframes bgShift{0%{transform:translate(0,0) rotate(0deg)}100%{transform:translate(4%,4%) rotate(6deg)}}
+
+        /* CANVAS PARTICLES */
+        #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
         /* NAV */
         nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,20,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
@@ -27,25 +32,51 @@
         /* HERO */
         #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 48px 60px;position:relative;z-index:1}
         .hero-inner{max-width:1100px;width:100%;display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center}
-        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:#a78bfa;padding:6px 16px;border-radius:100px;font-size:13px;font-weight:500;margin-bottom:24px}
+
+        /* BADGE */
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:#a78bfa;padding:6px 16px;border-radius:100px;font-size:13px;font-weight:500;margin-bottom:24px;animation:slideDown .7s ease both}
         .hero-badge span{width:7px;height:7px;border-radius:50%;background:#a78bfa;animation:pulse 2s infinite}
         @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-        .hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(44px,6.5vw,84px);font-weight:800;line-height:1.08;margin-bottom:16px;background:linear-gradient(135deg,#fff 25%,rgba(167,139,250,.95) 55%,rgba(6,182,212,.9) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero-title{font-size:clamp(16px,2.5vw,22px);color:var(--accent2);font-weight:600;margin-bottom:20px;letter-spacing:.5px}
-        .hero-bio{font-size:16px;color:var(--muted);line-height:1.85;max-width:540px;margin-bottom:40px}
-        .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
-        .btn-primary{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;transition:all .3s;box-shadow:0 8px 32px rgba(124,58,237,.3)}
+        @keyframes slideDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+
+        /* NAME WITH SHIMMER */
+        .hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(44px,6.5vw,84px);font-weight:800;line-height:1.08;margin-bottom:16px;position:relative;display:inline-block;animation:slideUp .8s ease .1s both}
+        .hero-name-text{background:linear-gradient(135deg,#fff 25%,rgba(167,139,250,.95) 55%,rgba(6,182,212,.9) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+        .hero-name::after{content:attr(data-text);position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:shimmer 3.5s ease-in-out infinite 1.5s}
+        @keyframes shimmer{0%{background-position:200%}100%{background-position:-200%}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+        .hero-title{font-size:clamp(16px,2.5vw,22px);color:var(--accent2);font-weight:600;margin-bottom:20px;letter-spacing:.5px;animation:slideUp .8s ease .2s both}
+        .hero-bio{font-size:16px;color:var(--muted);line-height:1.85;max-width:540px;margin-bottom:40px;animation:slideUp .8s ease .3s both}
+        .hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:slideUp .8s ease .4s both}
+
+        .btn-primary{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;transition:all .3s;box-shadow:0 8px 32px rgba(124,58,237,.3);position:relative;overflow:hidden}
+        .btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);background-size:200%;transform:translateX(-100%);transition:transform .5s}
+        .btn-primary:hover::after{transform:translateX(100%)}
         .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(124,58,237,.45)}
         .btn-secondary{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;background:var(--glass);border:1px solid var(--border);color:var(--text);border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;transition:all .3s}
         .btn-secondary:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
-        .hero-photo-wrap{position:relative;flex-shrink:0}
-        .hero-photo-glow{position:absolute;inset:-24px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent3),var(--accent));animation:spin 7s linear infinite;filter:blur(28px);opacity:.45}
-        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-        .hero-photo-ring{position:relative;width:270px;height:270px;border-radius:50%;padding:4px;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent3),var(--accent));animation:spin 7s linear infinite}
-        .hero-photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:5px solid var(--bg);display:block;animation:none!important}
+
+        /* PHOTO — FLOAT ANIMATION */
+        .hero-photo-wrap{position:relative;flex-shrink:0;animation:slideUp .9s ease .2s both}
+        .photo-glow{position:absolute;inset:-20px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.5) 0%,rgba(6,182,212,.3) 50%,transparent 70%);animation:glowPulse 4s ease-in-out infinite;filter:blur(20px)}
+        @keyframes glowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.9;transform:scale(1.08)}}
+        .photo-border{width:270px;height:270px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));animation:float 5s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-14px) rotate(1.5deg)}75%{transform:translateY(8px) rotate(-1deg)}}
+        .photo-border img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:5px solid var(--bg);display:block}
+
+        /* ORBITING DOTS */
+        .orbit{position:absolute;top:50%;left:50%;width:310px;height:310px;margin:-155px 0 0 -155px;border-radius:50%;animation:orbitSpin 12s linear infinite;pointer-events:none}
+        .orbit::before,.orbit::after{content:'';position:absolute;border-radius:50%}
+        .orbit::before{width:12px;height:12px;background:var(--accent);top:0;left:50%;margin-left:-6px;box-shadow:0 0 12px var(--accent)}
+        .orbit::after{width:8px;height:8px;background:var(--accent2);bottom:0;left:50%;margin-left:-4px;box-shadow:0 0 8px var(--accent2)}
+        @keyframes orbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        .orbit2{animation-duration:18s;animation-direction:reverse}
+        .orbit2::before{width:7px;height:7px;background:var(--accent3);box-shadow:0 0 8px var(--accent3)}
+        .orbit2::after{display:none}
 
         /* STATS */
-        .hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+        .hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid var(--border);animation:slideUp .8s ease .5s both}
         .stat-num{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--text)}
         .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
 
@@ -58,17 +89,22 @@
 
         /* SKILLS */
         .skills-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:860px;margin:0 auto}
-        .skill-badge{display:flex;align-items:center;gap:10px;padding:12px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:14px;font-weight:500;color:var(--text);transition:all .3s;cursor:default;backdrop-filter:blur(8px)}
-        .skill-badge:hover{border-color:var(--accent);background:rgba(124,58,237,.12);transform:translateY(-4px);box-shadow:0 8px 28px rgba(124,58,237,.2)}
+        .skill-badge{display:flex;align-items:center;gap:10px;padding:12px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:14px;font-weight:500;color:var(--text);transition:all .3s;cursor:default;backdrop-filter:blur(8px);opacity:0;transform:translateY(20px) scale(.95)}
+        .skill-badge.visible{opacity:1;transform:translateY(0) scale(1)}
+        .skill-badge:hover{border-color:var(--accent);background:rgba(124,58,237,.12);transform:translateY(-6px) scale(1.04);box-shadow:0 12px 32px rgba(124,58,237,.25)}
         .skill-badge i{font-size:18px}
 
         /* PROJECTS */
         .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto}
-        .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:all .3s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block;backdrop-filter:blur(8px)}
+        .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:all .35s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block;backdrop-filter:blur(8px);opacity:0;transform:translateY(30px)}
+        .project-card.visible{opacity:1;transform:translateY(0)}
         .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s}
-        .project-card:hover{border-color:rgba(124,58,237,.35);transform:translateY(-7px);box-shadow:0 24px 64px rgba(0,0,0,.35)}
+        .project-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(124,58,237,.08) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+        .project-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-8px);box-shadow:0 28px 72px rgba(0,0,0,.4)}
         .project-card:hover::before{opacity:1}
-        .project-icon{width:50px;height:50px;border-radius:13px;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(6,182,212,.2));display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;border:1px solid rgba(124,58,237,.2)}
+        .project-card:hover::after{opacity:1}
+        .project-icon{width:50px;height:50px;border-radius:13px;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(6,182,212,.2));display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;border:1px solid rgba(124,58,237,.2);transition:transform .3s}
+        .project-card:hover .project-icon{transform:scale(1.12) rotate(-4deg)}
         .project-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)}
         .project-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px}
         .project-tags{display:flex;flex-wrap:wrap;gap:8px}
@@ -79,7 +115,8 @@
         .see-all-card:hover{background:rgba(124,58,237,.12)}
 
         /* QUOTE */
-        .quote-card{max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:52px 48px;text-align:center;position:relative;overflow:hidden;backdrop-filter:blur(8px)}
+        .quote-card{max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:52px 48px;text-align:center;position:relative;overflow:hidden;backdrop-filter:blur(8px);opacity:0;transform:scale(.96)}
+        .quote-card.visible{opacity:1;transform:scale(1);transition:all .8s ease}
         .quote-card::before{content:'"';position:absolute;top:-30px;left:24px;font-size:180px;color:rgba(124,58,237,.08);font-family:Georgia,serif;line-height:1}
         .quote-text{font-size:19px;line-height:1.85;color:var(--text);font-style:italic;margin-bottom:20px;position:relative}
         .quote-author{color:var(--accent2);font-size:14px;font-weight:600}
@@ -90,11 +127,11 @@
         .footer-copy{color:var(--muted);font-size:14px}
         .footer-socials{display:flex;gap:12px}
         .footer-socials a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--border);border-radius:11px;color:var(--muted);font-size:17px;text-decoration:none;transition:all .3s}
-        .footer-socials a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-3px)}
+        .footer-socials a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-4px) scale(1.1)}
 
-        /* ANIMATIONS */
-        .fade-in{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-        .fade-in.visible{opacity:1;transform:translateY(0)}
+        /* SECTION FADE */
+        .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
 
         /* MOBILE */
         @media(max-width:768px){
@@ -107,7 +144,8 @@
             .hero-btns{justify-content:center}
             .hero-bio{max-width:100%}
             .hero-stats{justify-content:center}
-            .hero-photo-ring{width:210px;height:210px}
+            .photo-border{width:210px;height:210px}
+            .orbit{width:250px;height:250px;margin:-125px 0 0 -125px}
             #hero{padding:100px 20px 60px}
             #skills,#projects,#quote{padding:60px 20px}
             footer{padding:32px 20px}
@@ -117,6 +155,8 @@
     </style>
 </head>
 <body>
+
+<canvas id="particles"></canvas>
 
 <nav>
     <a href="index.html" class="nav-logo">AB.</a>
@@ -134,7 +174,7 @@
     <div class="hero-inner">
         <div>
             <div class="hero-badge"><span></span> Open to opportunities</div>
-            <h1 class="hero-name">Alan Biju</h1>
+            <h1 class="hero-name" data-text="Alan Biju"><span class="hero-name-text">Alan Biju</span></h1>
             <p class="hero-title">BSc AI &amp; Data Science Student</p>
             <p class="hero-bio">Passionate about Artificial Intelligence and Data Science &mdash; building intelligent systems, exploring machine learning, and crafting web experiences that make a real impact.</p>
             <div class="hero-btns">
@@ -143,7 +183,7 @@
             </div>
             <div class="hero-stats">
                 <div>
-                    <div class="stat-num">8+</div>
+                    <div class="stat-num" data-count="8">0</div>
                     <div class="stat-label">Projects</div>
                 </div>
                 <div>
@@ -158,8 +198,10 @@
         </div>
         <div>
             <div class="hero-photo-wrap">
-                <div class="hero-photo-glow"></div>
-                <div class="hero-photo-ring">
+                <div class="photo-glow"></div>
+                <div class="orbit"></div>
+                <div class="orbit orbit2"></div>
+                <div class="photo-border">
                     <img src="me.jpg" alt="Alan Biju">
                 </div>
             </div>
@@ -167,9 +209,11 @@
     </div>
 </section>
 
-<section id="skills" class="fade-in">
-    <p class="section-label">What I Work With</p>
-    <h2 class="section-title">Skills &amp; <span>Tech Stack</span></h2>
+<section id="skills">
+    <div class="reveal">
+        <p class="section-label">What I Work With</p>
+        <h2 class="section-title">Skills &amp; <span>Tech Stack</span></h2>
+    </div>
     <div class="skills-grid">
         <div class="skill-badge"><i class="fab fa-python" style="color:#3b82f6"></i> Python</div>
         <div class="skill-badge"><i class="fas fa-brain" style="color:#a78bfa"></i> Machine Learning</div>
@@ -186,9 +230,11 @@
     </div>
 </section>
 
-<section id="projects" class="fade-in">
-    <p class="section-label">What I've Built</p>
-    <h2 class="section-title">Featured <span>Projects</span></h2>
+<section id="projects">
+    <div class="reveal">
+        <p class="section-label">What I've Built</p>
+        <h2 class="section-title">Featured <span>Projects</span></h2>
+    </div>
     <div class="projects-grid">
         <a href="https://github.com/Alanbiju433/realtime-chat-app" target="_blank" rel="noopener" class="project-card">
             <div class="project-icon">&#x1F4AC;</div>
@@ -218,7 +264,7 @@
     </div>
 </section>
 
-<section id="quote" class="fade-in">
+<section id="quote">
     <div class="quote-card">
         <p class="quote-text">Life is like a rollercoaster &mdash; it has its ups and downs, but it&rsquo;s your choice to either scream or enjoy the ride.</p>
         <p class="quote-author">&mdash; Avril Lavigne</p>
@@ -238,9 +284,92 @@
 </footer>
 
 <script>
+/* NAV TOGGLE */
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
-const obs=new IntersectionObserver((e)=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')}),{threshold:.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+/* PARTICLES */
+(function(){
+    const c=document.getElementById('particles'),ctx=c.getContext('2d');
+    let W,H,pts=[];
+    function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+    resize();window.addEventListener('resize',resize);
+    for(let i=0;i<70;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.4,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,o:Math.random()*.5+.15});
+    function draw(){
+        ctx.clearRect(0,0,W,H);
+        pts.forEach(p=>{
+            p.x+=p.vx;p.y+=p.vy;
+            if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+            if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+            ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ctx.fillStyle='rgba(167,139,250,'+p.o+')';ctx.fill();
+        });
+        // draw lines between close particles
+        for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+            const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+            if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(124,58,237,'+(0.12*(1-d/110))+')';ctx.lineWidth=.6;ctx.stroke()}
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+/* COUNT-UP */
+function countUp(el,target,dur){
+    let start=0,step=target/dur*16;
+    function tick(){start+=step;if(start>=target){el.textContent=target+'+';return}el.textContent=Math.floor(start)+'+';requestAnimationFrame(tick)}
+    tick();
+}
+const statEls=document.querySelectorAll('[data-count]');
+let counted=false;
+
+/* INTERSECTION OBSERVER */
+const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(el=>{
+        if(el.isIntersecting){
+            el.target.classList.add('visible');
+            obs.unobserve(el.target);
+        }
+    });
+},{threshold:.12});
+
+/* STAGGER SKILLS */
+const skills=document.querySelectorAll('.skill-badge');
+const skillObs=new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting){
+        skills.forEach((s,i)=>setTimeout(()=>{s.style.transition='opacity .5s ease '+i*45+'ms, transform .5s ease '+i*45+'ms';s.classList.add('visible')},i*55));
+        skillObs.disconnect();
+    }
+},{threshold:.1});
+if(skills.length)skillObs.observe(skills[0].parentElement);
+
+/* STAGGER PROJECTS */
+const cards=document.querySelectorAll('.project-card');
+const cardObs=new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting){
+        cards.forEach((c,i)=>setTimeout(()=>{c.style.transition='opacity .6s ease '+i*80+'ms, transform .6s ease '+i*80+'ms, border-color .35s, box-shadow .35s';c.classList.add('visible')},i*90));
+        cardObs.disconnect();
+    }
+},{threshold:.08});
+if(cards.length)cardObs.observe(cards[0].parentElement);
+
+/* REVEAL SECTIONS + COUNT-UP */
+document.querySelectorAll('.reveal,.quote-card').forEach(el=>obs.observe(el));
+const heroObs=new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting&&!counted){
+        counted=true;
+        statEls.forEach(el=>countUp(el,parseInt(el.dataset.count),40));
+    }
+},{threshold:.5});
+heroObs.observe(document.getElementById('hero'));
+
+/* PROJECT CARD MOUSE GLOW */
+cards.forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+        const r=card.getBoundingClientRect();
+        card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+        card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    });
+});
 </script>
 </body>
 </html>
