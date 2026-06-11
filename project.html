@@ -441,4 +441,18 @@ document.querySelectorAll('.fb-btn').forEach(btn=>{
 function openPanel(p){
   document.getElementById('ph2-ic').textContent=p.ic;document.getElementById('ph2-t').textContent=p.t;
   const st=document.getElementById('ph2-st');st.textContent=p.stTxt;st.className='ph2-st '+(p.st==='live'?'ps-live':'ps-dev');
-  document.getElementById('pb').innerHTML=`<p class="pb-lbl">About</p><p class="pb-text">${p.full}</p><p class="pb-lbl">Key Features</p>${p.feats.map(f=>`<div class="pb-feat"><span class="pb-fd">▶</span>${f}</div>`).join('')}<p class="pb-lbl">Tech Stack</p><div class="pb-chips">${p.tech.map(t=>`<span class="pb-chip">${t}</span>`).join('')}</div><div class="pb-links">${p.link?`<a href="${p.link}" target="_blank" class="pbl pbl-p"><i class="fab fa-github"></i> GitHub</a>`:`<span class="pbl pbl-s" style="opacity:.5;cursor:defa
+  document.getElementById('pb').innerHTML=`<p class="pb-lbl">About</p><p class="pb-text">${p.full}</p><p class="pb-lbl">Key Features</p>${p.feats.map(f=>`<div class="pb-feat"><span class="pb-fd">▶</span>${f}</div>`).join('')}<p class="pb-lbl">Tech Stack</p><div class="pb-chips">${p.tech.map(t=>`<span class="pb-chip">${t}</span>`).join('')}</div><div class="pb-links">${p.link?`<a href="${p.link}" target="_blank" class="pbl pbl-p"><i class="fab fa-github"></i> GitHub</a>`:`<span class="pbl pbl-s" style="opacity:.5;cursor:default"><i class="fas fa-lock"></i> Private</span>`}</div>`;
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closePanel(){
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+const rObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');rObs.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
+</script>
+</body>
+</html>
