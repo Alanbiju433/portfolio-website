@@ -6,7 +6,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>av
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#07050a;--red:#cc0000;--red2:#ff2828;--text:#f0e8ea;--muted:#9a8a8e;--border:rgba(204,0,0,0.18);--card:rgba(16,8,10,0.92);--r:10px}
 html{scroll-behavior:smooth}
@@ -268,6 +268,7 @@ function toggleNav(){document.getElementById('nav-links').classList.toggle('open
 function sendMail(e){e.preventDefault();const first=document.getElementById('cf-first').value.trim();const last=document.getElementById('cf-last').value.trim();const email=document.getElementById('cf-email').value.trim();const subj=document.getElementById('cf-subject').value||'Portfolio Enquiry';const msg=document.getElementById('cf-msg').value.trim();const body=`From: ${first} ${last}\nEmail: ${email}\n\n${msg}`;window.location.href=`mailto:alanbiju17@gmail.com?subject=${encodeURIComponent('[Portfolio] '+subj)}&body=${encodeURIComponent(body)}`;document.getElementById('cf-ok').style.display='block';document.getElementById('cf-btn').textContent='✓ Sent!';document.getElementById('cf-btn').style.background='#00a844';}
 window.addEventListener('scroll',()=>{const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
 (function(){const c=document.getElementById('cur-cvs');if(!c)return;const x=c.getContext('2d');function rs(){c.width=innerWidth;c.height=innerHeight}rs();window.addEventListener('resize',rs);const pts=[];window.addEventListener('mousemove',e=>pts.push({x:e.clientX,y:e.clientY,t:Date.now()}));function draw(){x.clearRect(0,0,c.width,c.height);const now=Date.now();while(pts.length&&now-pts[0].t>700)pts.shift();for(let i=1;i<pts.length;i++){x.beginPath();x.moveTo(pts[i-1].x,pts[i-1].y);x.lineTo(pts[i].x,pts[i].y);x.strokeStyle=`rgba(204,0,0,${(i/pts.length)*0.65})`;x.lineWidth=1.4;x.stroke()}requestAnimationFrame(draw)}draw()})();
+const rObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');rObs.unobserve(e.target)}})},{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
 </script>
 </body>
 </html>
