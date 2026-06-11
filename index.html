@@ -394,16 +394,14 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 <script>
 // ===== DOOR =====
-window.addEventListener('load',()=>{
-  document.body.style.overflow='hidden';
+document.body.style.overflow='hidden';
+setTimeout(()=>{
+  document.getElementById('intro').classList.add('opening');
   setTimeout(()=>{
-    document.getElementById('intro').classList.add('opening');
-    setTimeout(()=>{
-      document.getElementById('intro').classList.add('done');
-      document.body.style.overflow='';
-    },1500);
-  },2000);
-});
+    document.getElementById('intro').classList.add('done');
+    document.body.style.overflow='';
+  },1500);
+},2000);
 
 // ===== NAV =====
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}

@@ -330,13 +330,11 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 // Cursor trail
 (function(){const c=document.getElementById('cur-cvs');if(!c)return;const x=c.getContext('2d');function rs(){c.width=innerWidth;c.height=innerHeight}rs();window.addEventListener('resize',rs);const pts=[];window.addEventListener('mousemove',e=>pts.push({x:e.clientX,y:e.clientY,t:Date.now()}));function draw(){x.clearRect(0,0,c.width,c.height);const now=Date.now();while(pts.length&&now-pts[0].t>700)pts.shift();for(let i=1;i<pts.length;i++){x.beginPath();x.moveTo(pts[i-1].x,pts[i-1].y);x.lineTo(pts[i].x,pts[i].y);x.strokeStyle=`rgba(204,0,0,${(i/pts.length)*0.65})`;x.lineWidth=1.4;x.stroke()}requestAnimationFrame(draw)}draw()})();
 // DOOR
-window.addEventListener('load',()=>{
-  document.body.style.overflow='hidden';
-  setTimeout(()=>{
-    document.getElementById('intro').classList.add('opening');
-    setTimeout(()=>{document.getElementById('intro').classList.add('done');document.body.style.overflow='';},1100);
-  },700);
-});
+document.body.style.overflow='hidden';
+setTimeout(()=>{
+  document.getElementById('intro').classList.add('opening');
+  setTimeout(()=>{document.getElementById('intro').classList.add('done');document.body.style.overflow='';},1100);
+},700);
 
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
 window.addEventListener('scroll',()=>{const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
