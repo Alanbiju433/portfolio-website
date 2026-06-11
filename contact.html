@@ -234,15 +234,16 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
         <div class="avail"><div class="avail-dot"></div>Available for internships &amp; collaborations</div>
         <h2 class="form-t">Send a message</h2>
         <p class="form-sub">I reply within 24 hours. For urgent matters — email directly at alanbiju17@gmail.com</p>
-        <form action="https://formspree.io/f/xjkwqvnn" method="POST">
+        <form id="contact-form" action="#" onsubmit="sendMail(event)">
           <div class="form-row">
-            <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="John" required></div>
-            <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"></div>
+            <div class="fg"><label>First Name</label><input type="text" id="cf-first" placeholder="John" required></div>
+            <div class="fg"><label>Last Name</label><input type="text" id="cf-last" placeholder="Smith"></div>
           </div>
-          <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
-          <div class="fg"><label>Subject</label><select name="subject"><option value="">Select a topic...</option><option>Internship / Job Opportunity</option><option>Project Collaboration</option><option>Freelance Work</option><option>General Enquiry</option></select></div>
-          <div class="fg"><label>Message</label><textarea name="message" rows="5" placeholder="Tell me about your project, opportunity, or idea..." required></textarea></div>
-          <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i>&nbsp; Send Message</button>
+          <div class="fg"><label>Email</label><input type="email" id="cf-email" placeholder="you@example.com" required></div>
+          <div class="fg"><label>Subject</label><select id="cf-subject"><option value="">Select a topic...</option><option>Internship / Job Opportunity</option><option>Project Collaboration</option><option>Freelance Work</option><option>General Enquiry</option></select></div>
+          <div class="fg"><label>Message</label><textarea id="cf-msg" rows="5" placeholder="Tell me about your project, opportunity, or idea..." required></textarea></div>
+          <button type="submit" class="submit-btn" id="cf-btn"><i class="fas fa-paper-plane"></i>&nbsp; Send Message</button>
+          <div id="cf-ok" style="display:none;margin-top:14px;padding:12px 16px;background:rgba(0,200,80,.12);border:1px solid rgba(0,200,80,.35);border-radius:8px;color:#00c850;font-size:13px;font-weight:700;text-align:center;">✓ Email client opened — message ready to send!</div>
         </form>
       </div>
     </div>
@@ -266,6 +267,7 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{document.getElementById('intro').classList.add('opening');setTimeout(()=>{document.getElementById('intro').classList.add('done');document.body.style.overflow='';},1100);},700);
 });
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
+function sendMail(e){e.preventDefault();const first=document.getElementById('cf-first').value.trim();const last=document.getElementById('cf-last').value.trim();const email=document.getElementById('cf-email').value.trim();const subj=document.getElementById('cf-subject').value||'Portfolio Enquiry';const msg=document.getElementById('cf-msg').value.trim();const body=`From: ${first} ${last}\nEmail: ${email}\n\n${msg}`;window.location.href=`mailto:alanbiju17@gmail.com?subject=${encodeURIComponent('[Portfolio] '+subj)}&body=${encodeURIComponent(body)}`;document.getElementById('cf-ok').style.display='block';document.getElementById('cf-btn').textContent='✓ Sent!';document.getElementById('cf-btn').style.background='#00a844';}
 window.addEventListener('scroll',()=>{const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
