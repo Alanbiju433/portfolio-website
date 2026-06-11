@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects | Alan Biju</title>
-<link rel="icon" href="icon.webp" type="image/x-icon">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -443,11 +443,4 @@ document.querySelectorAll('.fb-btn').forEach(btn=>{
 function openPanel(p){
   document.getElementById('ph2-ic').textContent=p.ic;document.getElementById('ph2-t').textContent=p.t;
   const st=document.getElementById('ph2-st');st.textContent=p.stTxt;st.className='ph2-st '+(p.st==='live'?'ps-live':'ps-dev');
-  document.getElementById('pb').innerHTML=`<p class="pb-lbl">About</p><p class="pb-text">${p.full}</p><p class="pb-lbl">Key Features</p>${p.feats.map(f=>`<div class="pb-feat"><span class="pb-fd">▶</span>${f}</div>`).join('')}<p class="pb-lbl">Tech Stack</p><div class="pb-chips">${p.tech.map(t=>`<span class="pb-chip">${t}</span>`).join('')}</div><div class="pb-links">${p.link?`<a href="${p.link}" target="_blank" class="pbl pbl-p"><i class="fab fa-github"></i> GitHub</a>`:`<span class="pbl pbl-s" style="opacity:.5;cursor:default"><i class="fas fa-lock"></i> Private</span>`}<a href="#" onclick="closePanel();return false" class="pbl pbl-s"><i class="fas fa-times"></i> Close</a></div>`;
-  document.getElementById('overlay').classList.add('show');document.getElementById('panel').classList.add('open');document.body.style.overflow='hidden';
-}
-function closePanel(){document.getElementById('overlay').classList.remove('show');document.getElementById('panel').classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
-</script>
-</body>
-</html>
+  document.getElementById('pb').innerHTML=`<p class="pb-lbl">About</p><p class="pb-text">${p.full}</p><p class="pb-lbl">Key Features</p>${p.feats.map(f=>`<div class="pb-feat"><span class="pb-fd">▶</span>${f}</div>`).join('')}<p class="pb-lbl">Tech Stack</p><div class="pb-chips">${p.tech.map(t=>`<span class="pb-chip">${t}</span>`).join('')}</div><div class="pb-links">${p.link?`<a href="${p.link}" target="_blank" class="pbl pbl-p"><i class="fab fa-github"></i> GitHub</a>`:`<span class="pbl pbl-s" style="opacity:.5;cursor:defa
