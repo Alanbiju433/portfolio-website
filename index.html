@@ -382,7 +382,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 <!-- SKILLS SIDEBAR -->
 <div id="sk-bar">
-  <div id="sk-tab"><span>⬡ SKILLS</span></div>
+  <div id="sk-tab"><span>SKILLS</span></div>
   <div id="sk-panel"><div class="sk-inner">
     <div class="sk-head">// SKILL MATRIX</div>
     <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-pct">78%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.78"></div></div></div>
@@ -541,7 +541,7 @@ const obs=new IntersectionObserver(ens=>ens.forEach(e=>{if(e.isIntersecting){set
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // Cursor web trail
 (function(){const c=document.getElementById('cur-cvs');if(!c)return;const x=c.getContext('2d');function rs(){c.width=innerWidth;c.height=innerHeight}rs();window.addEventListener('resize',rs);const pts=[];window.addEventListener('mousemove',e=>pts.push({x:e.clientX,y:e.clientY,t:Date.now()}));function draw(){x.clearRect(0,0,c.width,c.height);const now=Date.now();while(pts.length&&now-pts[0].t>700)pts.shift();for(let i=1;i<pts.length;i++){x.beginPath();x.moveTo(pts[i-1].x,pts[i-1].y);x.lineTo(pts[i].x,pts[i].y);x.strokeStyle=`rgba(204,0,0,${(i/pts.length)*0.65})`;x.lineWidth=1.4;x.stroke()}requestAnimationFrame(draw)}draw()})();
-const cObs=new IntersectionObserver(ens=>ens.forEach(e=>{if(e.isIntersecting){const tgt=+e.target.dataset.target;let c=0;const go=()=>{c+=Math.ceil(tgt/35);if(c>=tgt){e.target.textContent=tgt+'+';return}e.target.textContent=c;requestAnimationFrame(go)};go();cObs.unobserve(e.target)}}),{threshold:.5});
+const cObs=new IntersectionObserver(ens=>ens.forEach(e=>{if(e.isIntersecting){const tgt=+e.target.dataset.target;let c=0;const go=()=>{c+=Math.ceil(tgt/35);if(c>=tgt){e.target.textContent=tgt+'+';return}e.target.textContent=c;requestAnimationFrame(go)};go();cObs.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
 </script>
 </body>
