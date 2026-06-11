@@ -46,9 +46,9 @@ nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;displ
 .hamburger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer}
 /* === WEB DECOS === */
 .web-deco{position:fixed;pointer-events:none;z-index:1}
-.web-deco.tr{top:0;right:0;opacity:.08}
-.web-deco.bl{bottom:0;left:0;transform:rotate(180deg);opacity:.065}
-.web-deco.mr{top:42%;right:0;transform:translateY(-50%) rotate(-55deg);opacity:.052}
+.web-deco.tr{top:0;right:0;opacity:.40}
+.web-deco.bl{bottom:0;left:0;transform:rotate(180deg);opacity:.34}
+.web-deco.mr{top:42%;right:0;transform:translateY(-50%) rotate(-55deg);opacity:.28}
 /* === SPIDER ART === */
 .spider-mask-bg{position:fixed;bottom:4%;right:1%;width:300px;height:360px;pointer-events:none;z-index:0;opacity:.07}
 .spidey-wall{position:fixed;right:0;top:22%;pointer-events:none;z-index:1;width:92px;opacity:.42;animation:wallSway 8s ease-in-out infinite}
@@ -188,18 +188,18 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   <div id="sk-tab"><span>⬡ SKILLS</span></div>
   <div id="sk-panel"><div class="sk-inner">
     <div class="sk-head">// SKILL MATRIX</div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-pct">85%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.85"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Web Dev</span><span class="sk-pct">80%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.80"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Git &amp; GitHub</span><span class="sk-pct">78%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.78"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Data Science</span><span class="sk-pct">76%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.76"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Machine Learning</span><span class="sk-pct">75%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.75"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Node.js</span><span class="sk-pct">72%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.72"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">TensorFlow</span><span class="sk-pct">71%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.71"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Computer Vision</span><span class="sk-pct">70%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.70"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">OpenCV</span><span class="sk-pct">69%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.69"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Deep Learning</span><span class="sk-pct">68%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.68"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-pct">78%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.78"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Web Dev</span><span class="sk-pct">74%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.74"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Node.js</span><span class="sk-pct">70%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.70"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Git &amp; GitHub</span><span class="sk-pct">70%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.70"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Data Science</span><span class="sk-pct">64%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.64"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Computer Vision</span><span class="sk-pct">63%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.63"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">OpenCV</span><span class="sk-pct">62%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.62"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Machine Learning</span><span class="sk-pct">60%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.60"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">TensorFlow</span><span class="sk-pct">56%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.56"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Deep Learning</span><span class="sk-pct">52%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.52"></div></div></div>
     <div class="sk-item"><div class="sk-row"><span class="sk-name">Socket.io</span><span class="sk-pct">70%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.70"></div></div></div>
-    <div class="sk-item"><div class="sk-row"><span class="sk-name">Game Dev</span><span class="sk-pct">65%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.65"></div></div></div>
+    <div class="sk-item"><div class="sk-row"><span class="sk-name">Game Dev</span><span class="sk-pct">42%</span></div><div class="sk-track"><div class="sk-fill" style="--w:.42"></div></div></div>
   </div></div>
 </div>
 <canvas id="cur-cvs"></canvas>
