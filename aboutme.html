@@ -1,223 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Alan Biju</title>
-    <link rel="icon" href="icon.webp" type="image/x-icon">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        :root{--bg:#060614;--accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#e2e8f0;--muted:#94a3b8;--glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.1);--card:rgba(13,13,43,0.8);--r:16px}
-        html{scroll-behavior:smooth}
-        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-        body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 20% 20%,rgba(124,58,237,.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(6,182,212,.1) 0%,transparent 50%);animation:bgShift 18s ease-in-out infinite alternate;pointer-events:none;z-index:0}
-        @keyframes bgShift{0%{transform:translate(0,0)}100%{transform:translate(4%,4%)}}
-        #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:9999;width:0;transition:width .08s linear}
-        nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,20,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-        .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;letter-spacing:-.3px}
-        .nav-links{display:flex;gap:4px;list-style:none}
-        .nav-links a{color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s}
-        .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--glass)}
-        .nav-cta{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;color:#fff!important;padding:8px 20px!important;border-radius:8px!important}
-        .hamburger{display:none;font-size:22px;cursor:pointer;color:var(--text);background:none;border:none}
-        .page-hero{padding:120px 48px 56px;text-align:center;position:relative;z-index:1}
-        .page-label{color:var(--accent2);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;animation:fadeUp .6s ease both}
-        .page-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,5vw,68px);font-weight:800;background:linear-gradient(135deg,#fff 25%,rgba(167,139,250,.95) 65%,rgba(6,182,212,.85) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .6s ease .1s both}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-        .container{max-width:1100px;margin:0 auto;padding:0 48px 80px;position:relative;z-index:1}
-        .about-intro{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:start;margin-bottom:80px}
-        .about-photo-wrap{position:relative;flex-shrink:0}
-        .photo-glow{position:absolute;inset:-20px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.45),rgba(6,182,212,.28),transparent 70%);animation:glowPulse 4s ease-in-out infinite;filter:blur(18px)}
-        @keyframes glowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.95;transform:scale(1.1)}}
-        .about-photo{width:230px;height:230px;border-radius:50%;object-fit:cover;border:4px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3)) border-box;animation:float 5.5s ease-in-out infinite;position:relative}
-        @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-14px) rotate(.8deg)}75%{transform:translateY(7px) rotate(-.5deg)}}
-        .about-text h2{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:800;margin-bottom:6px;color:var(--text)}
-        .about-text .role{color:var(--accent2);font-size:15px;font-weight:600;margin-bottom:22px;letter-spacing:.3px}
-        .about-text p{color:var(--muted);font-size:15px;line-height:1.9;margin-bottom:14px}
-        .info-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-        .chip{display:flex;align-items:center;gap:8px;padding:9px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--muted);backdrop-filter:blur(8px);transition:all .3s}
-        .chip:hover{border-color:rgba(124,58,237,.3);color:var(--text)}
-        .chip i{color:var(--accent2);font-size:13px}
-        .sec-title{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;margin-bottom:32px;color:var(--text);display:flex;align-items:center;gap:14px}
-        .sec-title i{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(6,182,212,.2));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-        .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
-        .timeline{position:relative;padding-left:32px;margin-bottom:80px}
-        .timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),rgba(6,182,212,0))}
-        .tl-item{position:relative;margin-bottom:20px;padding:24px 28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px);transition:all .35s}
-        .tl-item:hover{border-color:rgba(124,58,237,.4);transform:translateX(6px);box-shadow:0 8px 32px rgba(0,0,0,.25)}
-        .tl-item::before{content:'';position:absolute;left:-39px;top:28px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:3px solid var(--bg);box-shadow:0 0 14px rgba(124,58,237,.6)}
-        .tl-year{font-size:11px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
-        .tl-title{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;color:var(--text);margin-bottom:7px}
-        .tl-sub{font-size:14px;color:var(--muted);line-height:1.75}
-        .skills-grid{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:80px}
-        .skill-badge{display:flex;align-items:center;gap:9px;padding:11px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:500;color:var(--text);transition:all .3s;backdrop-filter:blur(8px)}
-        .skill-badge:hover{border-color:var(--accent);background:rgba(124,58,237,.1);transform:translateY(-5px);box-shadow:0 8px 24px rgba(124,58,237,.2)}
-        .skill-badge i{font-size:16px}
-        .achieve-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;margin-bottom:80px}
-        .achieve-card{padding:26px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px);transition:all .35s;position:relative;overflow:hidden}
-        .achieve-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s}
-        .achieve-card:hover{border-color:rgba(124,58,237,.35);transform:translateY(-7px);box-shadow:0 20px 56px rgba(0,0,0,.32)}
-        .achieve-card:hover::before{opacity:1}
-        .achieve-icon{font-size:30px;margin-bottom:14px}
-        .achieve-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
-        .achieve-desc{font-size:13px;color:var(--muted);line-height:1.75}
-        .exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-bottom:80px}
-        .exp-card{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(8px);transition:all .35s;border-left:3px solid transparent}
-        .exp-card:hover{border-left-color:var(--accent2);transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.28)}
-        .exp-role{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
-        .exp-place{font-size:13px;color:var(--accent2);font-weight:600;margin-bottom:10px}
-        .exp-desc{font-size:13px;color:var(--muted);line-height:1.7}
-        .reveal{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s ease}
-        .reveal.visible{opacity:1;transform:translateY(0)}
-        footer{padding:48px;border-top:1px solid var(--border);position:relative;z-index:1}
-        .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-        .footer-copy{color:var(--muted);font-size:14px}
-        .footer-socials{display:flex;gap:12px}
-        .footer-socials a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--border);border-radius:11px;color:var(--muted);font-size:17px;text-decoration:none;transition:all .3s}
-        .footer-socials a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;transform:translateY(-4px) scale(1.08)}
-        @media(max-width:768px){nav{padding:0 20px}.nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(6,6,20,.97);backdrop-filter:blur(20px);padding:20px;gap:4px;border-bottom:1px solid var(--border)}.nav-links.open{display:flex}.hamburger{display:block}.page-hero,.container{padding-left:20px;padding-right:20px}.about-intro{grid-template-columns:1fr;text-align:center}.about-photo-wrap{display:flex;justify-content:center}.info-chips{justify-content:center}footer{padding:32px 20px}.footer-inner{flex-direction:column;text-align:center}}
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Alan Biju</title>
+<link rel="icon" href="icon.webp" type="image/x-icon">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07050a;--red:#cc0000;--red2:#ff2828;--text:#f0e8ea;--muted:#9a8a8e;--border:rgba(204,0,0,0.18);--card:rgba(16,8,10,0.92);--r:10px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+body::after{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(200,0,0,0.055) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;z-index:0}
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--red2),#ff8080);z-index:999;width:0;transition:width .08s linear}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,3,8,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{text-decoration:none;display:flex;align-items:center;gap:10px}
+.nav-logo-icon{width:34px;height:34px}
+.nav-logo-text{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:900;color:var(--text);letter-spacing:-.5px}
+.nav-logo-text em{color:var(--red);font-style:normal}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{color:rgba(240,232,234,.6);text-decoration:none;padding:7px 13px;border-radius:6px;font-size:13px;font-weight:500;transition:all .2s}
+.nav-links a:hover,.nav-links a.act{color:var(--text);background:rgba(204,0,0,.1)}
+.nav-cta{background:var(--red)!important;color:#fff!important;font-weight:700!important}
+.nav-cta:hover{background:var(--red2)!important;box-shadow:0 0 22px rgba(204,0,0,.5)!important}
+.hamburger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer}
+.web-deco{position:fixed;pointer-events:none;opacity:.07;z-index:1}
+.page-hero{padding:110px 48px 56px;text-align:center;position:relative;z-index:2}
+.ph-label{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:12px}
+.ph-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,6vw,72px);font-weight:900;letter-spacing:-2px;background:linear-gradient(90deg,#fff 0%,rgba(240,180,180,.9) 60%,rgba(204,0,0,.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.container{max-width:1060px;margin:0 auto;padding:0 48px 90px;position:relative;z-index:2}
+/* About intro */
+.about-intro{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:start;margin-bottom:80px}
+.photo-wrap{position:relative;flex-shrink:0}
+.photo-glow{position:absolute;inset:-20px;border-radius:50%;background:radial-gradient(circle,rgba(204,0,0,.4),transparent 65%);filter:blur(20px);animation:gp 4s ease-in-out infinite}
+@keyframes gp{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.about-photo{width:220px;height:220px;border-radius:50%;object-fit:cover;border:3px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(135deg,var(--red),var(--red2),#ff8080) border-box;animation:float 6s ease-in-out infinite;position:relative;z-index:2}
+@keyframes float{0%,100%{transform:translateY(0)}40%{transform:translateY(-14px) rotate(.6deg)}70%{transform:translateY(7px) rotate(-.4deg)}}
+.about-text h2{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
+.about-text .role{color:var(--red);font-size:14px;font-weight:600;margin-bottom:20px;letter-spacing:.3px}
+.about-text p{color:var(--muted);font-size:14px;line-height:1.9;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.chip{display:flex;align-items:center;gap:7px;padding:7px 14px;background:var(--card);border:1px solid var(--border);border-radius:7px;font-size:12px;color:var(--muted);transition:all .25s}
+.chip:hover{border-color:rgba(204,0,0,.3);color:var(--text)}
+.chip i{color:var(--red);font-size:12px}
+/* Section header */
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.sh-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.sh-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.sh-icon{width:34px;height:34px;border-radius:8px;background:rgba(204,0,0,.12);border:1px solid rgba(204,0,0,.2);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:14px;flex-shrink:0}
+/* Timeline */
+.timeline{position:relative;padding-left:30px;margin-bottom:72px}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--red),rgba(204,0,0,0))}
+.tl-item{position:relative;margin-bottom:18px;padding:22px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:all .3s}
+.tl-item:hover{border-color:rgba(204,0,0,.38);transform:translateX(6px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.tl-item::before{content:'';position:absolute;left:-37px;top:26px;width:12px;height:12px;border-radius:50%;background:var(--red);border:2px solid var(--bg);box-shadow:0 0 12px rgba(204,0,0,.7)}
+.tl-yr{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+.tl-t{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.2px}
+.tl-d{font-size:13px;color:var(--muted);line-height:1.75}
+/* Skills */
+.skills-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:72px}
+.sb{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text);transition:all .3s;cursor:default}
+.sb:hover{border-color:rgba(204,0,0,.38);background:rgba(204,0,0,.07);transform:translateY(-4px);box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.sb i{font-size:15px}
+/* Achievements */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:72px}
+.ach-card{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:all .35s;position:relative;overflow:hidden}
+.ach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--red2));opacity:0;transition:opacity .3s}
+.ach-card:hover{border-color:rgba(204,0,0,.35);transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,.4)}
+.ach-card:hover::before{opacity:1}
+.ach-ic{font-size:28px;margin-bottom:12px}
+.ach-t{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:7px;letter-spacing:-.2px}
+.ach-d{font-size:12px;color:var(--muted);line-height:1.75}
+/* Experience */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-bottom:72px}
+.exp-card{padding:22px;background:var(--card);border:1px solid var(--border);border-left:2px solid transparent;border-radius:var(--r);transition:all .3s}
+.exp-card:hover{border-left-color:var(--red);transform:translateY(-5px);box-shadow:0 12px 34px rgba(0,0,0,.3)}
+.exp-r{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:800;color:var(--text);margin-bottom:3px}
+.exp-p{font-size:12px;color:var(--red);font-weight:600;margin-bottom:9px}
+.exp-d{font-size:12px;color:var(--muted);line-height:1.7}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.reveal.vis{opacity:1;transform:translateY(0)}
+footer{padding:48px;border-top:1px solid var(--border);position:relative;z-index:2}
+.fi{max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.fb-logo{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:900;color:var(--text)}
+.fb-logo em{color:var(--red);font-style:normal}
+.copy{font-size:13px;color:rgba(148,163,184,.45)}
+.socials{display:flex;gap:9px}
+.socials a{width:40px;height:40px;border-radius:7px;background:rgba(204,0,0,.07);border:1px solid var(--border);color:var(--muted);font-size:15px;text-decoration:none;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.socials a:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-3px) scale(1.08)}
+@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(7,3,8,.98);padding:16px;gap:4px;border-bottom:1px solid var(--border)}.nav-links.open{display:flex}.hamburger{display:block}.page-hero,.container,footer{padding-left:20px;padding-right:20px}.about-intro{grid-template-columns:1fr;text-align:center}.photo-wrap{display:flex;justify-content:center}.chips{justify-content:center}.fi{flex-direction:column;text-align:center}}
+</style>
 </head>
 <body>
 <div id="progress"></div>
+<svg class="web-deco" style="top:0;right:0;width:240px;height:240px" viewBox="0 0 280 280"><g stroke="#cc0000" fill="none"><line x1="280" y1="0" x2="0" y2="0" stroke-width=".5" opacity=".5"/><line x1="280" y1="0" x2="0" y2="56" stroke-width=".5" opacity=".35"/><line x1="280" y1="0" x2="0" y2="112" stroke-width=".5" opacity=".25"/><line x1="280" y1="0" x2="56" y2="0" stroke-width=".5" opacity=".5"/><line x1="280" y1="0" x2="112" y2="0" stroke-width=".5" opacity=".35"/><polyline points="280,0 240,32 200,0 160,32 120,0 80,32 40,0 0,32" stroke-width=".6" opacity=".35"/><polyline points="280,0 224,72 168,0 112,72 56,0 0,72" stroke-width=".5" opacity=".25"/></g></svg>
 <nav>
-    <a href="index.html" class="nav-logo">Alan Biju</a>
-    <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutme.html" class="active">About</a></li>
-        <li><a href="project.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="demovideo.html">Demo</a></li>
-        <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
-    </ul>
-    <button class="hamburger" onclick="toggleNav()">&#9776;</button>
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="15.5" stroke="#cc0000" stroke-width="1" opacity=".5"/><line x1="17" y1="1.5" x2="17" y2="32.5" stroke="#cc0000" stroke-width=".7" opacity=".45"/><line x1="1.5" y1="17" x2="32.5" y2="17" stroke="#cc0000" stroke-width=".7" opacity=".45"/><line x1="6" y1="6" x2="28" y2="28" stroke="#cc0000" stroke-width=".7" opacity=".45"/><line x1="28" y1="6" x2="6" y2="28" stroke="#cc0000" stroke-width=".7" opacity=".45"/><circle cx="17" cy="17" r="6" stroke="#cc0000" stroke-width=".7" opacity=".55"/><circle cx="17" cy="17" r="11" stroke="#cc0000" stroke-width=".6" opacity=".35"/><circle cx="17" cy="17" r="3" fill="#cc0000"/></svg>
+    <div class="nav-logo-text">ALAN<em>.</em></div>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="aboutme.html" class="act">About</a></li>
+    <li><a href="project.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="demovideo.html">Demo</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleNav()">&#9776;</button>
 </nav>
 <div class="page-hero">
-    <p class="page-label">The person behind the code</p>
-    <h1 class="page-title">About Me</h1>
+  <p class="ph-label">The person behind the code</p>
+  <h1 class="ph-title">About Me</h1>
 </div>
 <div class="container">
-    <div class="about-intro reveal">
-        <div class="about-photo-wrap">
-            <div class="photo-glow"></div>
-            <img src="me.jpg" alt="Alan Biju" class="about-photo">
-        </div>
-        <div class="about-text">
-            <h2>Alan Biju</h2>
-            <p class="role">BSc Artificial Intelligence &amp; Data Science &mdash; University of Northampton</p>
-            <p>I'm a 20-year-old AI and Data Science student from Kerala, India, currently based in Northampton, UK. My academic and personal interests converge around one idea: building technology that genuinely matters — systems that are intelligent, purposeful, and human-centred.</p>
-            <p>Beyond the screen, I'm a passionate footballer, creative writer, and avid reader. I believe the best engineers are curious about everything — and I try to live that way every day.</p>
-            <div class="info-chips">
-                <div class="chip"><i class="fas fa-map-marker-alt"></i> Northampton, UK</div>
-                <div class="chip"><i class="fas fa-birthday-cake"></i> 18 January 2006</div>
-                <div class="chip"><i class="fas fa-graduation-cap"></i> BSc AI &amp; Data Science</div>
-                <div class="chip"><i class="fas fa-football-ball"></i> Football Enthusiast</div>
-                <div class="chip"><i class="fas fa-envelope"></i> alanbiju17@gmail.com</div>
-            </div>
-        </div>
+  <div class="about-intro reveal">
+    <div class="photo-wrap">
+      <div class="photo-glow"></div>
+      <img src="me.jpg" alt="Alan Biju" class="about-photo">
     </div>
-    <div class="reveal">
-        <h2 class="sec-title"><i class="fas fa-graduation-cap" style="color:var(--accent2)"></i> Education</h2>
+    <div class="about-text">
+      <h2>Alan Biju</h2>
+      <p class="role">BSc Artificial Intelligence &amp; Data Science &mdash; University of Northampton</p>
+      <p>I'm a 20-year-old AI and Data Science student from Kerala, India, currently based in Northampton, UK. I build things that matter — ML models, games, real-time apps, and tools that push the boundary between imagination and reality.</p>
+      <p>Off-screen: I'm a passionate footballer, creative writer, and avid reader. I believe the best engineers are curious about everything — and I live by that every day.</p>
+      <div class="chips">
+        <div class="chip"><i class="fas fa-map-marker-alt"></i> Northampton, UK</div>
+        <div class="chip"><i class="fas fa-birthday-cake"></i> 18 Jan 2006</div>
+        <div class="chip"><i class="fas fa-graduation-cap"></i> BSc AI &amp; Data Science</div>
+        <div class="chip"><i class="fas fa-football-ball"></i> Football Enthusiast</div>
+        <div class="chip"><i class="fas fa-envelope"></i> alanbiju17@gmail.com</div>
+      </div>
     </div>
-    <div class="timeline reveal">
-        <div class="tl-item">
-            <div class="tl-year">2024 &mdash; Present</div>
-            <div class="tl-title">BSc Artificial Intelligence &amp; Data Science</div>
-            <div class="tl-sub">University of Northampton, United Kingdom — Studying core areas including machine learning, computer vision, data analytics, and intelligent system design. Actively applying skills to real-world projects.</div>
-        </div>
-        <div class="tl-item">
-            <div class="tl-year">2022 &mdash; 2024</div>
-            <div class="tl-title">Higher Secondary Certificate (Biology Science) — Full A+</div>
-            <div class="tl-sub">GHSS Sadhanadhapuram, Kerala, India — Achieved 92.45% aggregate with full A+ grades, demonstrating consistent academic rigour across all subjects.</div>
-        </div>
-        <div class="tl-item">
-            <div class="tl-year">2021 &mdash; 2022</div>
-            <div class="tl-title">SSLC (GCSE Equivalent) — Full A+</div>
-            <div class="tl-sub">St. Mary's HSS Kizhekketheruvu, Kerala, India — Completed with above 90% and full A+ grades, establishing a strong academic foundation.</div>
-        </div>
-    </div>
-    <div class="reveal">
-        <h2 class="sec-title"><i class="fas fa-code" style="color:var(--accent2)"></i> Technical Skills</h2>
-    </div>
-    <div class="skills-grid reveal">
-        <div class="skill-badge"><i class="fab fa-python" style="color:#3b82f6"></i> Python</div>
-        <div class="skill-badge"><i class="fas fa-brain" style="color:#a78bfa"></i> Machine Learning</div>
-        <div class="skill-badge"><i class="fas fa-robot" style="color:#22d3ee"></i> Artificial Intelligence</div>
-        <div class="skill-badge"><i class="fas fa-eye" style="color:#fb923c"></i> Computer Vision</div>
-        <div class="skill-badge"><i class="fas fa-chart-line" style="color:#4ade80"></i> Data Science</div>
-        <div class="skill-badge"><i class="fab fa-html5" style="color:#f97316"></i> HTML5</div>
-        <div class="skill-badge"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> CSS3</div>
-        <div class="skill-badge"><i class="fab fa-js" style="color:#eab308"></i> JavaScript</div>
-        <div class="skill-badge"><i class="fab fa-node-js" style="color:#4ade80"></i> Node.js</div>
-        <div class="skill-badge"><i class="fab fa-github" style="color:#e2e8f0"></i> Git &amp; GitHub</div>
-        <div class="skill-badge"><i class="fas fa-database" style="color:#f472b6"></i> Databases</div>
-        <div class="skill-badge"><i class="fas fa-network-wired" style="color:#a78bfa"></i> Deep Learning</div>
-        <div class="skill-badge"><i class="fas fa-file-excel" style="color:#4ade80"></i> Microsoft Excel</div>
-        <div class="skill-badge"><i class="fas fa-comments" style="color:#f472b6"></i> Communication</div>
-    </div>
-    <div class="reveal">
-        <h2 class="sec-title"><i class="fas fa-trophy" style="color:var(--accent3)"></i> Achievements</h2>
-    </div>
-    <div class="achieve-grid reveal">
-        <div class="achieve-card">
-            <div class="achieve-icon">🥉</div>
-            <div class="achieve-title">Kerala School Science Fair 2024 — 3rd Place</div>
-            <div class="achieve-desc">Secured third position at the district level, presenting an innovative science and technology project before a panel of expert judges.</div>
-        </div>
-        <div class="achieve-card">
-            <div class="achieve-icon">🏅</div>
-            <div class="achieve-title">Young Innovators Program 2024 — District A Grade</div>
-            <div class="achieve-desc">Recognised twice with District-level A Grade in Kerala's prestigious Young Innovators Program — a competitive platform for emerging technology talent.</div>
-        </div>
-        <div class="achieve-card">
-            <div class="achieve-icon">🎓</div>
-            <div class="achieve-title">Academic Excellence — Full A+ Both Boards</div>
-            <div class="achieve-desc">Completed both SSLC and Higher Secondary examinations with full A+ grades, maintaining academic excellence across science and technology subjects.</div>
-        </div>
-    </div>
-    <div class="reveal">
-        <h2 class="sec-title"><i class="fas fa-briefcase" style="color:var(--accent2)"></i> Work Experience</h2>
-    </div>
-    <div class="exp-grid reveal">
-        <div class="exp-card">
-            <div class="exp-role">Care Home Worker</div>
-            <div class="exp-place">Healthcare Sector, UK</div>
-            <div class="exp-desc">Delivered person-centred care with empathy and professionalism, developing resilience, patience, and strong interpersonal skills under pressure.</div>
-        </div>
-        <div class="exp-card">
-            <div class="exp-role">Hospitality Staff</div>
-            <div class="exp-place">Constellation, UK</div>
-            <div class="exp-desc">Provided exceptional guest experiences in a high-standard hospitality environment. Developed teamwork, adaptability, and customer service expertise.</div>
-        </div>
-        <div class="exp-card">
-            <div class="exp-role">Waiter</div>
-            <div class="exp-place">Cousins Restaurant, UK</div>
-            <div class="exp-desc">Served customers efficiently in a fast-paced restaurant setting, maintaining accuracy, professionalism, and strong time management throughout.</div>
-        </div>
-        <div class="exp-card">
-            <div class="exp-role">Billing Assistant</div>
-            <div class="exp-place">Dry-Clean Shop, Kerala</div>
-            <div class="exp-desc">Managed customer billing and transaction records using Microsoft Excel, building practical data management and customer service skills.</div>
-        </div>
-    </div>
+  </div>
+  <div class="reveal">
+    <div class="sh"><div class="sh-title"><div class="sh-icon"><i class="fas fa-graduation-cap"></i></div> Education</div><div class="sh-line"></div></div>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-item"><div class="tl-yr">2024 &mdash; Present</div><div class="tl-t">BSc Artificial Intelligence &amp; Data Science</div><div class="tl-d">University of Northampton, UK — Machine learning, computer vision, data analytics, and intelligent system design. Actively applying concepts to real-world projects.</div></div>
+    <div class="tl-item"><div class="tl-yr">2022 &mdash; 2024</div><div class="tl-t">Higher Secondary Certificate — Full A+</div><div class="tl-d">GHSS Sadhanadhapuram, Kerala — 92.45% aggregate, full A+ across all subjects.</div></div>
+    <div class="tl-item"><div class="tl-yr">2021 &mdash; 2022</div><div class="tl-t">SSLC (GCSE Equivalent) — Full A+</div><div class="tl-d">St. Mary's HSS Kizhekketheruvu, Kerala — Above 90%, full A+ grades.</div></div>
+  </div>
+  <div class="reveal">
+    <div class="sh"><div class="sh-title"><div class="sh-icon"><i class="fas fa-code"></i></div> Technical Skills</div><div class="sh-line"></div></div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="sb"><i class="fab fa-python" style="color:#3b82f6"></i> Python</div>
+    <div class="sb"><i class="fas fa-brain" style="color:#a78bfa"></i> Machine Learning</div>
+    <div class="sb"><i class="fas fa-robot" style="color:#22d3ee"></i> Artificial Intelligence</div>
+    <div class="sb"><i class="fas fa-eye" style="color:#fb923c"></i> Computer Vision</div>
+    <div class="sb"><i class="fas fa-chart-line" style="color:#4ade80"></i> Data Science</div>
+    <div class="sb"><i class="fab fa-html5" style="color:#f97316"></i> HTML5</div>
+    <div class="sb"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> CSS3</div>
+    <div class="sb"><i class="fab fa-js" style="color:#eab308"></i> JavaScript</div>
+    <div class="sb"><i class="fab fa-node-js" style="color:#4ade80"></i> Node.js</div>
+    <div class="sb"><i class="fab fa-github" style="color:#e2e8f0"></i> Git &amp; GitHub</div>
+    <div class="sb"><i class="fas fa-database" style="color:#f472b6"></i> Databases</div>
+    <div class="sb"><i class="fas fa-gamepad" style="color:#f472b6"></i> Game Development</div>
+    <div class="sb"><i class="fas fa-network-wired" style="color:#a78bfa"></i> Deep Learning</div>
+    <div class="sb"><i class="fas fa-file-excel" style="color:#4ade80"></i> Microsoft Excel</div>
+  </div>
+  <div class="reveal">
+    <div class="sh"><div class="sh-title"><div class="sh-icon"><i class="fas fa-trophy"></i></div> Achievements</div><div class="sh-line"></div></div>
+  </div>
+  <div class="ach-grid reveal">
+    <div class="ach-card"><div class="ach-ic">🥉</div><div class="ach-t">Kerala School Science Fair 2024 — 3rd Place</div><div class="ach-d">District-level placement presenting an innovative science and technology project before expert judges.</div></div>
+    <div class="ach-card"><div class="ach-ic">🏅</div><div class="ach-t">Young Innovators Program — District A Grade ×2</div><div class="ach-d">Recognised twice with District A Grade in Kerala's prestigious Young Innovators Program for emerging technology talent.</div></div>
+    <div class="ach-card"><div class="ach-ic">🎓</div><div class="ach-t">Academic Excellence — Full A+ Both Boards</div><div class="ach-d">Full A+ grades in both SSLC and Higher Secondary, demonstrating consistent academic rigour.</div></div>
+  </div>
+  <div class="reveal">
+    <div class="sh"><div class="sh-title"><div class="sh-icon"><i class="fas fa-briefcase"></i></div> Work Experience</div><div class="sh-line"></div></div>
+  </div>
+  <div class="exp-grid reveal">
+    <div class="exp-card"><div class="exp-r">Care Home Worker</div><div class="exp-p">Healthcare Sector, UK</div><div class="exp-d">Delivered person-centred care, developing resilience, empathy, and strong interpersonal skills.</div></div>
+    <div class="exp-card"><div class="exp-r">Hospitality Staff</div><div class="exp-p">Constellation, UK</div><div class="exp-d">High-standard hospitality environment — teamwork, adaptability, and guest service expertise.</div></div>
+    <div class="exp-card"><div class="exp-r">Waiter</div><div class="exp-p">Cousins Restaurant, UK</div><div class="exp-d">Fast-paced restaurant service — accuracy, professionalism, and time management under pressure.</div></div>
+    <div class="exp-card"><div class="exp-r">Billing Assistant</div><div class="exp-p">Dry-Clean Shop, Kerala</div><div class="exp-d">Customer billing and records via Excel — practical data management and customer service skills.</div></div>
+  </div>
 </div>
 <footer>
-    <div class="footer-inner">
-        <p class="footer-copy">&#169; 2025 Alan Biju &mdash; AI &amp; Data Science Student</p>
-        <div class="footer-socials">
-            <a href="https://www.instagram.com/egoistisagi_/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="mailto:alanbiju17@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
+  <div class="fi">
+    <div><div class="fb-logo">ALAN<em>.</em></div></div>
+    <div class="socials">
+      <a href="https://www.instagram.com/egoistisagi_/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=100012227791569" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+      <a href="https://github.com/Alanbiju433" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+      <a href="mailto:alanbiju17@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
+    <p class="copy">&#169; 2025 Alan Biju</p>
+  </div>
 </footer>
 <script>
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
-window.addEventListener('scroll',()=>{const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
-const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}}),{threshold:.1});
+window.addEventListener('scroll',()=>{const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
