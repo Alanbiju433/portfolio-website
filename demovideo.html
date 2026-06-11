@@ -247,10 +247,8 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   </div>
 </footer>
 <script>
-window.addEventListener('load',()=>{
-  document.body.style.overflow='hidden';
-  setTimeout(()=>{document.getElementById('intro').classList.add('opening');setTimeout(()=>{document.getElementById('intro').classList.add('done');document.body.style.overflow='';},1100);},700);
-});
+document.body.style.overflow='hidden';
+setTimeout(()=>{document.getElementById('intro').classList.add('opening');setTimeout(()=>{document.getElementById('intro').classList.add('done');document.body.style.overflow='';},1100);},700);
 function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
 window.addEventListener('scroll',()=>{const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100;document.getElementById('progress').style.width=p+'%'});
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}}),{threshold:.1});
@@ -259,4 +257,3 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
-  
